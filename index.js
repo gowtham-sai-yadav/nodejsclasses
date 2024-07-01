@@ -1,5 +1,5 @@
-// const fs = require('fs');
-// const path = require('path');
+const fs = require('fs');
+const path = require('path');
 
 // // Specify the path to the file
 // const folderPath = path.join(__dirname);
@@ -73,14 +73,33 @@
 //     }
 // });
 
+const filepath=path.join(__dirname,'index.html');
 const http = require('http');
 
+
 const server=http.createServer((req,res) =>{
+    const data = fs.readFileSync('index.html','utf-8',(err)=>{
+        if(err){
+            console.error('error occured')
+        }
+    })
     res.setHeader('Content-Type','text/html');
 
-    res.write('<html><head><title>node js class </title></head><body>');
-    res.write('<h1>hello world!');
-    res.write('</body></html>');
+    res.write(data);
+
+
+    // if(req.url==='/login') {
+    //     res.write('<html><head><title>node js class </title></head><body>');
+    //     res.write('<h1>hello Login!</h1>');
+    //     res.write('</body></html>');
+        
+    // }else{
+    //     res.write('<html><head><title>node js class </title></head><body>');
+    //     res.write('<h1>hello world!</h1>');
+    //     res.write('</body></html>');
+        
+        
+    // }
     res.end();
 })
 
